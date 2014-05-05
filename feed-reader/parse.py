@@ -17,7 +17,7 @@ def tree_from_url(url):
     """
     response = requests.get(url)
     assert response.status_code == 200
-    return tree_from_string(response.text)
+    return tree_from_string(response.content)
 
 def tree_from_string(contents):
     """Builds a parse tree from a string.
