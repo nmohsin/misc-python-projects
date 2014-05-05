@@ -45,17 +45,17 @@ def parse_item(item_tree):
 
     title_subtree = item_tree.find('title')
     if title_subtree is not None:
-        item_dict['title'] = title_subtree.text
+        item_dict['title'] = utils.strip_markup(title_subtree.text.strip())
 
     desc_subtree = item_tree.find('description')
     if desc_subtree is not None:
-        item_dict['description'] = desc_subtree.text
+        item_dict['description'] = desc_subtree.text.strip()
 
     guid_subtree = item_tree.find('guid')
     if guid_subtree is not None:
-        text = guid_subtree.text
+        text = guid_subtree.text.strip()
         has_permalink_attrib = 'isPermaLink' in guid_subtree.attrib
-        marked_permalink = has_permalink_attrib and guid_subtree.attrib['isPermaLink']
+        marked_permalink = has_permalink_attrib and (guid_subtree.attrib['isPermaLink'] == True)
 
         if marked_permalink:
             item_dict['url'] = text
@@ -65,7 +65,7 @@ def parse_item(item_tree):
     if 'url' not in item_dict:
         link_subtree = item_tree.find('link')
         if link_subtree is not None:
-            text = link_subtree.text
+            text = link_subtree.text.strip()
             item_dict['url'] = text
 
     return item_dict

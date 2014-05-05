@@ -26,14 +26,19 @@ def test(url):
     print parse.header_data(pt)
     print
     for elem in parse.items(pt):
-        print elem
-        print
+        pprint_dict(elem)
+    print
+
+
+def pprint_dict(d):
+    for key, value in sorted(d.items()):
+        print key, ':',  value
     print
 
 def main():
-    test('http://cyber.law.harvard.edu/rss/examples/rss2sample.xml')
-    test('http://www.feedforall.com/sample.xml')
-    test('http://www.feedforall.com/sample-feed.xml')
+    # test('http://cyber.law.harvard.edu/rss/examples/rss2sample.xml')
+    # test('http://www.feedforall.com/sample.xml')
+    # test('http://www.feedforall.com/sample-feed.xml')
     test('http://www.feedforall.com/blog-feed.xml')
 
 if __name__ == '__main__':
