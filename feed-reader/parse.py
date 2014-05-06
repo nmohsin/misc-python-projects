@@ -50,6 +50,8 @@ def parse_item(item_tree):
     desc_subtree = item_tree.find('description')
     if desc_subtree is not None:
         item_dict['description'] = desc_subtree.text.strip()
+        if 'title' not in item_dict:
+            item_dict['title'] = utils.shorten(utils.strip_markup(item_dict['description']), 30)
 
     guid_subtree = item_tree.find('guid')
     if guid_subtree is not None:
@@ -71,7 +73,6 @@ def parse_item(item_tree):
     return item_dict
 
     
-
     
             
         
